@@ -19,17 +19,34 @@ export function useClickInside(ref, callback) {
 
 export function useClickOutside(ref, callback) {
   useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
     function handleClick(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (node.nodeName == "DIALOG") {
+        let rect = node.getBoundingClientRect();
+        let isInDialog =
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width;
+
+        if (!isInDialog) {
+          node.close();
+        }
+        return;
+      }
+      if (node && !node.contains(event.target)) {
         console.log("Clicked outside");
         callback(event);
       }
     }
 
-    document.addEventListener("click", handleClick);
+    const target = node.nodeName == "DIALOG" ? node : document;
+    target.addEventListener("click", handleClick);
 
     return () => {
-      document.removeEventListener("click", handleClick);
+      target.removeEventListener("click", handleClick);
     };
   }, [ref, callback]);
 }

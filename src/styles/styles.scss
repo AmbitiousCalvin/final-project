@@ -116,3 +116,20 @@ body.__dark-theme {
 .text-gray {
   color: $text-gray;
 }
+
+dialog {
+  display: block;
+  margin: 100px auto 0;
+  opacity: 0;
+  scale: 0;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+dialog[open] {
+  transition: all 0.15s;
+  opacity: 1;
+  scale: 1;
+}
