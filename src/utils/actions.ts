@@ -8,7 +8,7 @@ export async function createUserDocument(user: User){
     const snap = await getDoc(ref)
 
     // to do: uncomment this after the app is finished
-    const hasAccount = JSON.parse(localStorage.getItem("hasAccount") ?? "");
+    const hasAccount = JSON.parse(localStorage.getItem("hasAccount") ?? "false");
 
     if (!hasAccount || snap.exists()) return
 
@@ -29,10 +29,9 @@ export async function createUserDocument(user: User){
 
 export async function getUserJoinDate(userId: string){
     const ref = doc(Users, userId)
-    const date = (JSON.parse(localStorage.getItem("createAt") ?? ""))
-    let snapshot = null;
+    const date = (JSON.parse(localStorage.getItem("createAt") ?? "false"))
 
-    if (date == null) {
+    if (!date) {
         const snapshot = await getDoc(ref);
 
         if (snapshot === null) {
@@ -98,9 +97,9 @@ export function useMonthlyBarChart( expenses: Expense[] ){
 // need to refactor this a bit.
 // this function will use the value from useFetchMonthlyExpenses
 export function useExpenseAcrossCategoriesByMonth(expenses: Expense[], month: number) {
-    const [categories, setCategories] = useState([]);
-    const [dataSet, setDataSet] = useState([]);
-    const [total, setTotal] = useState(0);
+    const [categories, setCategories] = useState<string[]>([]);
+    const [dataSet, setDataSet] = useState<number[]>([]);
+    const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
         const categoryData: Record<string, number> = {};
@@ -115,8 +114,8 @@ export function useExpenseAcrossCategoriesByMonth(expenses: Expense[], month: nu
             }
         }
 
-        const newCategories = Object.keys(categoryData);
-        const newDataSet = Object.values(categoryData);
+        const newCategories: string[] = Object.keys(categoryData);
+        const newDataSet: number[] = Object.values(categoryData);
 
         setCategories(newCategories);
         setDataSet(newDataSet);
