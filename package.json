@@ -1,6 +1,6 @@
 {
   "name": "my-project",
-  "private": true,
+  "homepage": "https://ambitiouscalvin.github.io/final-project/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
