@@ -4,12 +4,13 @@ import "./styles/App.scss";
 // import { useLayout } from "./contexts/layoutContext";
 // import { useClickOutside } from "./hooks/useClick";
 import { Timestamp } from 'firebase/firestore'
-
 // import { useState, useEffect } from "react";
 import { useAuthState, googleSignInWithPopup, signOutUser } from "./utils/firebase";
 
 // utilities functions
-import { format, createCategory, createExpense, usefetchAllCategories, usefetchAllExpenses, deleteCategory, deleteExpense } from './utils/actions'
+import { format } from './utils/actions'
+import { createCategory, deleteCategory, usefetchAllCategories } from './utils/categories';
+import { createExpense, deleteExpense, usefetchAllExpenses } from './utils/expenses';
 
 
 // components

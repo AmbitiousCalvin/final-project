@@ -2,11 +2,6 @@ import { Users, ErrorLogger } from './firebase'
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { User, Expense } from './definitions'
 import { useState, useEffect } from 'react'
-import { createCategory, deleteCategory, updateCategory, usefetchAllCategories } from './categories';
-import { createExpense, deleteExpense, updateExpense, usefetchAllExpenses } from './expenses';
-
-export { createCategory, deleteCategory, updateCategory, usefetchAllCategories, createExpense, deleteExpense, updateExpense, usefetchAllExpenses }
-
 
 export async function createUserDocument(user: User){
     const ref = doc(Users, user.uid)

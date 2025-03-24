@@ -1,16 +1,16 @@
 import { createContext, useContext } from "react";
-import useDarkMode from "../hooks/useDarkMode";
-import useToggle from "../hooks/useToggle";
+// import useDarkMode from "../hooks/useDarkMode";
+// import useToggle from "../hooks/useToggle";
 
 const LayoutContext = createContext();
 
 export function LayoutProvider({ children }) {
-    const [isDarkMode, setDarkMode] = useDarkMode();
-    const [isSidebarOpen, toggleSidebar] = useToggle(true);
+    // const [isDarkMode, setDarkMode] = useDarkMode();
+    // const [isSidebarOpen, toggleSidebar] = useToggle(true);
 
     return (
         <LayoutContext.Provider
-            value={{ isDarkMode, setDarkMode, isSidebarOpen, toggleSidebar }}
+            // value={{ isDarkMode, setDarkMode, isSidebarOpen, toggleSidebar }}
         >
             {children}
         </LayoutContext.Provider>

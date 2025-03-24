@@ -2,7 +2,6 @@ import { Line } from "react-chartjs-2";
 import  { format } from "../utils/actions"
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend } from "chart.js";
 import {useState, useEffect} from 'react'
-// Register necessary Chart.js components
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend);
 import { getUserJoinDate } from '../utils/actions'
 
