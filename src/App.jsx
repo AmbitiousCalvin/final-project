@@ -106,6 +106,7 @@ function App() {
             <option value="other">Other</option>
           </select>
           <input type="text" name="name" required placeholder="Expense Name"></input>
+          <input type="date" name="expenseDate" required placeholder="Expense Date"></input>
           <input type="number" step="0.01" name="amount" required min="0" placeholder="Amount"></input>
           <button type="submit">Submit</button>
         </form>
