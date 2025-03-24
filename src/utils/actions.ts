@@ -40,7 +40,7 @@ export async function getUserJoinDate(userId: string){
         }
 
         const user = snapshot.data() as User;
-        const date = user.createAt.toDate();
+        const date = user.createAt.toDate().toLocaleTimeString('en-US');
         localStorage.setItem("createAt", JSON.stringify(date));
 
         return date;

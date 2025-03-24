@@ -18,7 +18,7 @@ import PieChart from './components/PieChart'
 import LineChart from './components/LineChart'
 import StackedBarChart from './components/StackedBarChart'
 import BarChartByCategories from './components/BarChartByCategory'
-import { generateFakeData  } from './fake'
+import { generateFakeData } from './fake'
 
 
 
@@ -46,7 +46,7 @@ function App() {
   }
 
 
-  function handleCategorySubmit(e){
+  function handleCategorySubmit(e) {
     e.preventDefault()
 
     createCategory(user.uid, {
@@ -78,7 +78,7 @@ function App() {
 
         {user && <h1>Welcome back, {user.displayName}!</h1>}
 
-        <input type="month" id="monthPicker" min="2024-03" max="2025-12"/>
+        <input type="month" id="monthPicker" min="2024-03" max="2025-12" />
 
 
         <form onSubmit={handleCategorySubmit}>
@@ -115,7 +115,7 @@ function App() {
         <hr></hr>
         <button onClick={generateFakeData}>Generate Fake data</button>
 
-        <input type="month" id="monthPicker"/>
+        <input type="month" id="monthPicker" />
 
         <br></br>
 
@@ -161,9 +161,9 @@ function App() {
           <PieChart totalBudget={totalBudget} spentAmount={totalExpenses} />
         </div>
         <br></br>
-        <hr/>
+        <hr />
         <br></br>
-        <LineChart user={user} expenses={expenses}></LineChart>
+        <LineChart expenses={expenses}></LineChart>
 
         <br></br>
         <hr />
