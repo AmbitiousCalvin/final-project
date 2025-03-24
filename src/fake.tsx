@@ -22,8 +22,8 @@ async function generateFakeCategories(): Promise<Category[]> {
     const category = {
       id: id,
       name: faker.commerce.department(),
-      budget: Number(faker.commerce.price({ min: 100, max: 3000, dec: 2 })) * 100,
-      date: timestamp,
+      budget: Number(faker.commerce.price({ min: 100, max: 3000, dec: 2 })),
+      createdAt: timestamp,
     } as Category;
 
     categories.push(category);
@@ -48,13 +48,15 @@ async function generateFakeExpenses(categories: Category[]) {
       const category = faker.helpers.arrayElement(categories);
 
       const timestamp = Timestamp.fromDate(new Date(2025, 2, i + 1));
+      
 
       const expense = {
         id,
         category: category.name,
         name: faker.commerce.productName(),
-        amount: Number(faker.commerce.price({ min: 100, max: 800, dec: 2 })) * 100,
-        date: timestamp,
+        amount: Number(faker.commerce.price({ min: 100, max: 800, dec: 2 })),
+        expenseDate: timestamp,
+        createdAt: timestamp,
       } as Expense;
 
     await setDoc(docRef, expense);

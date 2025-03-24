@@ -4,7 +4,7 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 import {useState, useEffect} from 'react'
 // Register necessary Chart.js components
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend);
-import { getUserAccCreationDay } from '../utils/actions'
+import { getUserJoinDate } from '../utils/actions'
 
 const months = [
     "January", "February", "March", "April", "May", "June",
@@ -16,21 +16,23 @@ const months = [
 const LineChart = ({ expenses, user }) => {
     // const current_month = new Date().getMonth() + 1
     const [userDate, setUserDate] = useState([])
-    const [selectedMonth, setSelectedMonth] = useState("")
+    // const [selectedMonth, setSelectedMonth] = useState("")
 
-    const current_month = 8
+    const current_month = 12
 
     const xLabel = new Date().toLocaleString('default', { month: 'long' });
     const title = `Monthly Report for ${new Date().toLocaleString("en-US", { month: "long" })}`
     const yLabel = `expenses`
 
-    let labels = expenses.map(expense => expense.date)
-    let data = expenses.map(expense => expense.amount / 100)
+    let labels = expenses.map(expense => expense.expenseDate)
+    let data = expenses.map(expense => expense.amount)
 
     useEffect(() => {
         async function getDate(){
-            let result = await getUserAccCreationDay(user.uid)
+            let result = await getUserJoinDate(user.uid)
+            console.log(result)
             setUserDate(result.split("/"))
+            // console.log(getMonthRange(result))
         }
 
         getDate()

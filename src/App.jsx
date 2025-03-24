@@ -3,12 +3,13 @@ import "./styles/App.scss";
 // import { FaMoon, FaSun } from "react-icons/fa";
 // import { useLayout } from "./contexts/layoutContext";
 // import { useClickOutside } from "./hooks/useClick";
+import { Timestamp } from 'firebase/firestore'
 
-import { useState, useRef, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useAuthState, googleSignInWithPopup, signOutUser } from "./utils/firebase";
 
 // utilities functions
-import { getUserAccCreationDay, format, createCategory, updateCategory, createExpense, updateExpense, usefetchAllCategories, usefetchAllExpenses, deleteCategory, deleteExpense } from './utils/actions'
+import { format, createCategory, createExpense, usefetchAllCategories, usefetchAllExpenses, deleteCategory, deleteExpense } from './utils/actions'
 
 
 // components
@@ -24,7 +25,7 @@ function App() {
   const { user, authLoading } = useAuthState()
   const { categories, totalBudget, categoriesLoading } = usefetchAllCategories(user)
   const { expenses, totalExpenses, expensesLoading } = usefetchAllExpenses(user)
-  const [selectedValue, setSelectedValue] = useState("")
+  // const [selectedValue, setSelectedValue] = useState("")
 
 
   if (authLoading) {
@@ -62,6 +63,7 @@ function App() {
       category: e.target.category.value,
       name: e.target.name.value,
       amount: parseFloat(e.target.amount.value),
+      expenseDate: Timestamp.fromDate(new Date(e.target.expenseDate.value)),
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 5)}`
     })
 
@@ -74,6 +76,9 @@ function App() {
 
 
         {user && <h1>Welcome back, {user.displayName}!</h1>}
+
+        <input type="month" id="monthPicker" min="2024-03" max="2025-12"/>
+
 
         <form onSubmit={handleCategorySubmit}>
           <h3>Create Category</h3>
@@ -88,9 +93,11 @@ function App() {
 
         <form onSubmit={handleExpenseSubmit}>
           <h3>Create Expense</h3>
-          <select required name="category" defaultValue="" onChange={(e) => {
-            setSelectedValue(e.target.value)
-          }}>
+          <select required name="category" defaultValue=""
+          // onChange={(e) => {
+          //   setSelectedValue(e.target.value)
+          // }}
+          >
             <option disabled value="">Select a category</option>
             {!!categories.length && categories.map(category => (
               <option key={category.id} value={category.name}>{category.name}</option>
@@ -106,6 +113,8 @@ function App() {
         <hr></hr>
         <button onClick={generateFakeData}>Generate Fake data</button>
 
+        <input type="month" id="monthPicker"/>
+
         <br></br>
 
         <div style={{
@@ -120,7 +129,7 @@ function App() {
               return (
                 <li key={category.id} >
                   <p>Name: {category.name} |</p>
-                  <p>Budget: {format(category.budget / 100, true)}</p>
+                  <p>Budget: {format(category.budget, true)}</p>
                   <button onClick={() => deleteCategory(user.uid, category)}>Delete</button>
                 </li>
               )
@@ -138,7 +147,7 @@ function App() {
               return (
                 <li key={expense.id}>
                   <p>Category: {expense.category} |</p>
-                  <p>Budget: {format(expense.amount / 100, true)}</p>
+                  <p>Budget: {format(expense.amount, true)}</p>
                   <button onClick={() => deleteExpense(user.uid, expense)}>Delete</button>
                 </li>
               );

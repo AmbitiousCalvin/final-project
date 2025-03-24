@@ -47,13 +47,13 @@ const PieChart = ({ totalBudget, spentAmount }) => {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
                 <div style={infoBoxStyle}>
-                    <strong>Total Budget:</strong> ${totalBudget}
+                    <strong>Total Budget:</strong> {format(totalBudget, true)}
                 </div>
                 <div style={infoBoxStyle}>
-                    <strong>Spent:</strong> ${spentAmount}
+                    <strong>Spent:</strong> {format(spentAmount, true)}
                 </div>
                 <div style={infoBoxStyle}>
-                    <strong>Remaining:</strong> ${remainingBudget}
+                    <strong>Remaining:</strong> {format(remainingBudget, true)}
                 </div>
 
                 {isOverBudget && (

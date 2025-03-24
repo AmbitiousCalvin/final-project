@@ -42,7 +42,7 @@ const BarChartByCategories = ({ expenses }) => {
             tooltip: {
                 callbacks: {
                     // This callback formats the tooltip as USD currency
-                    label: (value) => format(value.raw / 100, true),
+                    label: (value) => format(value.raw, true),
                 },
             },
         },

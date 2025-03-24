@@ -93,7 +93,7 @@ export function useAuthState() {
 
 
         return () => unsubscribe()
-    }, [auth])
+    }, [])
 
     return { user, error, authLoading: loading }
 }
